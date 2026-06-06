@@ -2,11 +2,6 @@
 session_start();
 require_once "../config/db.php";
 
-if ($_SESSION['role'] != 'admin'){
-    echo "Access Denied!";
-    exit;
-}
-
 $id_barang  = $_POST['barang_id'];
 $jenis      = $_POST['jenis'];
 $jumlah     = $_POST['jumlah'];
@@ -68,7 +63,13 @@ $stmt_riwayat->bind_param(
 );
 
 if ($stmt_update->execute() && $stmt_riwayat->execute()){
-    header("Location: ../admin/riwayat.php");
+    if (isset($_SESSION['user'])){
+        if ($_SESSION['role'] == 'admin'){
+            header("Location: ../admin/riwayat.php");
+        }else{
+            header("Location: ../user/riwayatuser.php");
+        }
+    }
     exit;
 }else{
     echo "Gagal menyimpan transaksi!";

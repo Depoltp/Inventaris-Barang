@@ -52,7 +52,7 @@ $result = $conn->query($sql);
                 </div>
             </div>
         </div>
-        <a href="login.php" class="btn btn-danger btn-sm">Logout</a>
+        <a href="../login/logout.php" class="btn btn-danger btn-sm">Logout</a>
     </div>
 </div>
 
